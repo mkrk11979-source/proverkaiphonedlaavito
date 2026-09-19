@@ -250,10 +250,7 @@
 
 <div id="splash-screen"></div>
 
-<!-- Кнопка «Домой» (возврат к первому экрану выбора режима) -->
 <button class="home-btn" onclick="goToHome()" title="На главную">🏠</button>
-
-<!-- Глобальная кнопка настроек, видна на всех экранах -->
 <button class="settings-btn" onclick="openSettings()">⚙️</button>
 
 <div id="mode-screen">
@@ -587,10 +584,7 @@
     <div class="score-circle" id="score-circle"><span id="score-val-text">100%</span></div>
     <h3 id="result-model">iPhone</h3>
 
-    <!-- Динамическая карточка цен -->
-    <div class="price-card" id="price-card-container">
-        <!-- Заполняется JS скриптом в зависимости от режима buy/sell -->
-    </div>
+    <div class="price-card" id="price-card-container"></div>
 
     <button class="details-btn" onclick="openDetailsModal()" data-i18n="detailsBtn">🔍 Узнать подробности</button>
     <button class="restart-btn" onclick="goToHome()" data-i18n="restartBtn">Оценить другое устройство</button>
@@ -604,7 +598,7 @@
     let selectedModelKey = "";
     let selectedModelName = "";
     let userMode = "buy";
-    let currentCurrencyIndex = 0; // 0: RUB, 1: USD, 2: EUR
+    let currentCurrencyIndex = 0;
     let currentLang = "ru";
     let hasAttemptedSubmit = false;
 
@@ -680,7 +674,34 @@
             mc4: "Микрофоны очень тихие", mc5: "Шипение при записи",
             netOk: "Всё работает", nt1: "Не ловит сеть (СИМ)", nt2: "Не работает eSIM", nt3: "Не работает Wi-Fi / Bluetooth", nt4: "Не работает датчик приближения",
             sim1: "1 SIM", sim2: "2 SIM (физ)", simesim: "SIM + eSIM", esimonly: "Только eSIM",
-            icloudYes: "Отвязан", icloudNo: "Не отвязан"
+            icloudYes: "Отвязан", icloudNo: "Не отвязан",
+            
+            // Факторы для детализации
+            factBoxOrig: "Оригинальная коробка в комплекте",
+            factBoxRepl: "Неоригинальная коробка / реплика",
+            factBoxNo: "Коробка отсутствует",
+            factSim2: "Две физические SIM-карты (2 SIM)",
+            factSimEsim: "Комбинация SIM + eSIM",
+            factIcloud: "Устройство не отвязано от iCloud (блокировка активации)",
+            factBodyScr: "Дефект корпуса/экрана",
+            factDispReplaced: "Дисплей менялся (замененный модуль)",
+            factDispTypeOrig: "Тип замены дисплея: установлен оригинальный дисплей",
+            factDispTypeCopy: "Тип замены дисплея: установлен неоригинальный дисплей (копия)",
+            factMatrixDefect: "Дефект матрицы дисплея",
+            factBioNotWorking: "Биометрия не работает",
+            factTrueToneNo: "Функция True Tone отсутствует (отключена при замене экрана)",
+            factBtnState: "Состояние кнопок",
+            factNfcNo: "Бесконтактная оплата (NFC / Apple Pay) не работает",
+            factBattReplaced: "Аккумулятор менялся (не заводской)",
+            factBattTypeOrig: "Тип замены аккумулятора: установлен оригинальный аккумулятор",
+            factBattTypeCopy: "Тип замены аккумулятора: установлен неоригинальный аккумулятор (копия)",
+            factBattWear: "Износ аккумулятора",
+            factCamReplaced: "Модуль камер менялся",
+            factCamTypeOrig: "Тип замены камеры: установлена оригинальная камера",
+            factCamTypeCopy: "Тип замены камеры: установлена неоригинальная камера (копия)",
+            factCamDefect: "Дефект работы камеры",
+            factMicDefect: "Проблема со звуком/микрофоном",
+            factNetDefect: "Связь и датчики"
         },
         en: {
             modeTitle: "Check iPhone Value", modeSub: "Select assessment goal:",
@@ -742,7 +763,33 @@
             mc4: "Microphones very quiet", mc5: "Hissing when recording",
             netOk: "Everything works", nt1: "No network (SIM)", nt2: "eSIM not working", nt3: "Wi-Fi / Bluetooth not working", nt4: "Proximity sensor not working",
             sim1: "1 SIM", sim2: "2 SIM (physical)", simesim: "SIM + eSIM", esimonly: "eSIM only",
-            icloudYes: "Signed out", icloudNo: "Signed in"
+            icloudYes: "Signed out", icloudNo: "Signed in",
+            
+            factBoxOrig: "Original box included",
+            factBoxRepl: "Non-original box / replica",
+            factBoxNo: "No box available",
+            factSim2: "Two physical SIM cards (2 SIM)",
+            factSimEsim: "SIM + eSIM combination",
+            factIcloud: "Device is not signed out of iCloud (activation lock)",
+            factBodyScr: "Body/screen defect",
+            factDispReplaced: "Display was replaced (replaced module)",
+            factDispTypeOrig: "Display replacement type: original display installed",
+            factDispTypeCopy: "Display replacement type: non-original display (copy) installed",
+            factMatrixDefect: "Display matrix defect",
+            factBioNotWorking: "Biometrics not working",
+            factTrueToneNo: "True Tone feature missing (disabled during screen replacement)",
+            factBtnState: "Buttons state",
+            factNfcNo: "Contactless payment (NFC / Apple Pay) not working",
+            factBattReplaced: "Battery was replaced (non-factory)",
+            factBattTypeOrig: "Battery replacement type: original battery installed",
+            factBattTypeCopy: "Battery replacement type: non-original battery (copy) installed",
+            factBattWear: "Battery wear",
+            factCamReplaced: "Camera module was replaced",
+            factCamTypeOrig: "Camera replacement type: original camera installed",
+            factCamTypeCopy: "Camera replacement type: non-original camera (copy) installed",
+            factCamDefect: "Camera operation defect",
+            factMicDefect: "Sound/microphone issue",
+            factNetDefect: "Connectivity and sensors"
         },
         zh: {
             modeTitle: "查询苹果手机价格", modeSub: "选择评估目的：",
@@ -804,7 +851,33 @@
             mc4: "麦克风声音很小", mc5: "录音时有杂音电流声",
             netOk: "一切正常", nt1: "无信号 (无法识别SIM)", nt2: "eSIM 无法使用", nt3: "Wi-Fi / 蓝牙故障", nt4: "距离感应器失效",
             sim1: "单SIM卡", sim2: "双物理SIM卡", simesim: "SIM + eSIM", esimonly: "仅支持 eSIM",
-            icloudYes: "已退出账号", icloudNo: "未退出账号"
+            icloudYes: "已退出账号", icloudNo: "未退出账号",
+            
+            factBoxOrig: "包含原装包装盒",
+            factBoxRepl: "非原装包装盒 / 仿制品",
+            factBoxNo: "无包装盒",
+            factSim2: "双物理 SIM 卡 (2 SIM)",
+            factSimEsim: "SIM + eSIM 组合",
+            factIcloud: "设备未退出 iCloud 账号（激活锁）",
+            factBodyScr: "机身/屏幕瑕疵",
+            factDispReplaced: "屏幕已更换（更换过总成）",
+            factDispTypeOrig: "屏幕更换类型：已安装原装屏幕",
+            factDispTypeCopy: "屏幕更换类型：已安装非原装屏幕（组装屏）",
+            factMatrixDefect: "液晶矩阵瑕疵",
+            factBioNotWorking: "生物识别功能失效",
+            factTrueToneNo: "缺少原彩显示功能（换屏后丢失）",
+            factBtnState: "按键状态",
+            factNfcNo: "非接触式支付 (NFC / Apple Pay) 无法使用",
+            factBattReplaced: "电池已更换（非原厂）",
+            factBattTypeOrig: "电池更换类型：已安装原装电池",
+            factBattTypeCopy: "电池更换类型：已安装非原装电池（组装电池）",
+            factBattWear: "电池损耗",
+            factCamReplaced: "相机模组已更换",
+            factCamTypeOrig: "相机更换类型：已安装原装相机",
+            factCamTypeCopy: "相机更换类型：已安装非原装相机（组装相机）",
+            factCamDefect: "相机工作异常",
+            factMicDefect: "声音/麦克风故障",
+            factNetDefect: "网络与传感器故障"
         }
     };
 
@@ -893,8 +966,7 @@
         checkCompletion();
 
         if (document.getElementById('result-screen').style.display === 'flex') {
-            renderPriceCard(baseCalculatedPriceRUB, lastDetailsList);
-            buildDetailsModalHtml(lastBasePrice, lastDetailsList, lastFinalScore);
+            calculateResult();
         }
     }
 
@@ -1159,6 +1231,7 @@
     function calculateResult() {
         const memSelect = document.getElementById('device-memory');
         const storageVal = memSelect.value;
+        const t = translations[currentLang];
         
         let basePrice = 15000;
         if (pricesDB[selectedModelKey] && pricesDB[selectedModelKey][storageVal]) {
@@ -1175,13 +1248,13 @@
             const boxType = document.querySelector('input[name="box_type"]:checked');
             if (boxType && boxType.value === 'original') {
                 totalPenalty -= 3;
-                details.push({ text: "Оригинальная коробка в комплекте", val: "+3%", type: "bonus" });
+                details.push({ text: t.factBoxOrig, val: "+3%", type: "bonus" });
             } else {
-                details.push({ text: "Неоригинальная коробка / реплика", val: "0%", type: "neutral" });
+                details.push({ text: t.factBoxRepl, val: "0%", type: "neutral" });
             }
         } else {
             totalPenalty += 3;
-            details.push({ text: "Коробка отсутствует", val: "-3%", type: "penalty" });
+            details.push({ text: t.factBoxNo, val: "-3%", type: "penalty" });
         }
 
         // 2. SIM-карты
@@ -1189,10 +1262,10 @@
         if (simType) {
             if (simType.value === '2sim') {
                 totalPenalty -= 5;
-                details.push({ text: "Две физические SIM-карты (2 SIM)", val: "+5%", type: "bonus" });
+                details.push({ text: t.factSim2, val: "+5%", type: "bonus" });
             } else if (simType.value === 'sim_esim') {
                 totalPenalty -= 3;
-                details.push({ text: "Комбинация SIM + eSIM", val: "+3%", type: "bonus" });
+                details.push({ text: t.factSimEsim, val: "+3%", type: "bonus" });
             }
         }
 
@@ -1200,33 +1273,34 @@
         const icloud = document.querySelector('input[name="icloud"]:checked');
         if (icloud && icloud.value === 'no') {
             totalPenalty += 100;
-            details.push({ text: "Устройство не отвязано от iCloud (блокировка активации)", val: "-100%", type: "penalty" });
+            details.push({ text: t.factIcloud, val: "-100%", type: "penalty" });
         }
 
-        // 4. Внешний вид (корпус и стекло)
+        // 4. Внешний вид
         const appearance = document.querySelector('input[name="appearance"]:checked');
         if (appearance && appearance.value === 'no') {
             const appChecks = document.querySelectorAll('#sub-app input[type="checkbox"]:checked');
             appChecks.forEach(ch => {
                 let p = parseInt(ch.getAttribute('data-penalty')) || 0;
                 totalPenalty += p;
-                let defectName = ch.nextElementSibling.innerText.toLowerCase();
-                details.push({ text: `Дефект корпуса/экрана: ${defectName}`, val: `-${p}%`, type: "penalty" });
+                let spanKey = ch.nextElementSibling.getAttribute('data-i18n');
+                let defectName = t[spanKey] || ch.nextElementSibling.innerText;
+                details.push({ text: `${t.factBodyScr}: ${defectName}`, val: `-${p}%`, type: "penalty" });
             });
         }
 
-        // 5. Дисплей (происхождение и дефекты)
+        // 5. Дисплей
         const dispOrig = document.querySelector('input[name="disp_orig"]:checked');
         if (dispOrig && dispOrig.value === 'replaced') {
             totalPenalty += 10;
-            details.push({ text: "Дисплей менялся (замененный модуль)", val: "-10%", type: "penalty" });
+            details.push({ text: t.factDispReplaced, val: "-10%", type: "penalty" });
             
             const dispType = document.querySelector('input[name="disp_type"]:checked');
             if (dispType) {
                 let p = parseInt(dispType.getAttribute('data-penalty')) || 0;
                 totalPenalty += p;
-                let typeText = dispType.value === 'orig_replaced' ? "установлен оригинальный дисплей" : "установлен неоригинальный дисплей (копия)";
-                details.push({ text: `Тип замены дисплея: ${typeText}`, val: `-${p}%`, type: "penalty" });
+                let typeText = dispType.value === 'orig_replaced' ? t.factDispTypeOrig : t.factDispTypeCopy;
+                details.push({ text: typeText, val: `-${p}%`, type: "penalty" });
             }
         }
         const display = document.querySelector('input[name="display"]:checked');
@@ -1235,8 +1309,9 @@
             dispChecks.forEach(ch => {
                 let p = parseInt(ch.getAttribute('data-penalty')) || 0;
                 totalPenalty += p;
-                let defectName = ch.nextElementSibling.innerText.toLowerCase();
-                details.push({ text: `Дефект матрицы дисплея: ${defectName}`, val: `-${p}%`, type: "penalty" });
+                let spanKey = ch.nextElementSibling.getAttribute('data-i18n');
+                let defectName = t[spanKey] || ch.nextElementSibling.innerText;
+                details.push({ text: `${t.factMatrixDefect}: ${defectName}`, val: `-${p}%`, type: "penalty" });
             });
         }
 
@@ -1246,12 +1321,12 @@
             let p = parseInt(bio.getAttribute('data-penalty')) || 15;
             totalPenalty += p;
             let bioName = selectedModelKey.includes('8') || selectedModelKey.includes('7') || selectedModelKey.includes('se') ? "Touch ID" : "Face ID";
-            details.push({ text: `Биометрия не работает (${bioName})`, val: `-${p}%`, type: "penalty" });
+            details.push({ text: `${t.factBioNotWorking} (${bioName})`, val: `-${p}%`, type: "penalty" });
         }
         const tt = document.querySelector('input[name="truetone"]:checked');
         if (tt && tt.value === 'no') {
             totalPenalty += 10;
-            details.push({ text: "Функция True Tone отсутствует (отключена при замене экрана)", val: "-10%", type: "penalty" });
+            details.push({ text: t.factTrueToneNo, val: "-10%", type: "penalty" });
         }
 
         // 7. Кнопки
@@ -1259,29 +1334,30 @@
         if (buttons && buttons.value !== 'ok') {
             let p = parseInt(buttons.parentElement.querySelector('input').getAttribute('data-penalty')) || 5;
             totalPenalty += p;
-            let btnState = buttons.value === 'stuck' ? "кнопки питания/громкости заедают" : "кнопки питания/громкости не работают";
-            details.push({ text: `Состояние кнопок: ${btnState}`, val: `-${p}%`, type: "penalty" });
+            let spanKey = buttons.parentElement.querySelector('span').getAttribute('data-i18n');
+            let btnState = t[spanKey] || buttons.parentElement.querySelector('span').innerText;
+            details.push({ text: `${t.factBtnState}: ${btnState.toLowerCase()}`, val: `-${p}%`, type: "penalty" });
         }
 
         // 8. NFC
         const nfc = document.querySelector('input[name="nfc_status"]:checked');
         if (nfc && nfc.value === 'no') {
             totalPenalty += 15;
-            details.push({ text: "Бесконтактная оплата (NFC / Apple Pay) не работает", val: "-15%", type: "penalty" });
+            details.push({ text: t.factNfcNo, val: "-15%", type: "penalty" });
         }
 
         // 9. Аккумулятор
         const battOrig = document.querySelector('input[name="batt_orig"]:checked');
         if (battOrig && battOrig.value === 'replaced') {
             totalPenalty += 5;
-            details.push({ text: "Аккумулятор менялся (не заводской)", val: "-5%", type: "penalty" });
+            details.push({ text: t.factBattReplaced, val: "-5%", type: "penalty" });
             
             const battType = document.querySelector('input[name="batt_type"]:checked');
             if (battType) {
                 let p = parseInt(battType.getAttribute('data-penalty')) || 0;
                 totalPenalty += p;
-                let bTypeText = battType.value === 'orig_replaced' ? "установлен оригинальный аккумулятор" : "установлен неоригинальный аккумулятор (копия)";
-                details.push({ text: `Тип замены аккумулятора: ${bTypeText}`, val: `-${p}%`, type: "penalty" });
+                let bTypeText = battType.value === 'orig_replaced' ? t.factBattTypeOrig : t.factBattTypeCopy;
+                details.push({ text: bTypeText, val: `-${p}%`, type: "penalty" });
             }
         }
         const battery = document.querySelector('input[name="battery"]:checked');
@@ -1290,8 +1366,9 @@
             if (battLvl) {
                 let p = parseInt(battLvl.getAttribute('data-penalty')) || 0;
                 totalPenalty += p;
-                let wearDesc = battLvl.nextElementSibling.innerText;
-                details.push({ text: `Износ аккумулятора: ${wearDesc}`, val: `-${p}%`, type: "penalty" });
+                let spanKey = battLvl.nextElementSibling.getAttribute('data-i18n');
+                let wearDesc = t[spanKey] || battLvl.nextElementSibling.innerText;
+                details.push({ text: `${t.factBattWear}: ${wearDesc}`, val: `-${p}%`, type: "penalty" });
             }
         }
 
@@ -1299,14 +1376,14 @@
         const camOrig = document.querySelector('input[name="cam_orig"]:checked');
         if (camOrig && camOrig.value === 'replaced') {
             totalPenalty += 10;
-            details.push({ text: "Модуль камер менялся", val: "-10%", type: "penalty" });
+            details.push({ text: t.factCamReplaced, val: "-10%", type: "penalty" });
             
             const camType = document.querySelector('input[name="cam_type"]:checked');
             if (camType) {
                 let p = parseInt(camType.getAttribute('data-penalty')) || 0;
                 totalPenalty += p;
-                let cTypeText = camType.value === 'orig_replaced' ? "установлена оригинальная камера" : "установлена неоригинальная камера (копия)";
-                details.push({ text: `Тип замены камеры: ${cTypeText}`, val: `-${p}%`, type: "penalty" });
+                let cTypeText = camType.value === 'orig_replaced' ? t.factCamTypeOrig : t.factCamTypeCopy;
+                details.push({ text: cTypeText, val: `-${p}%`, type: "penalty" });
             }
         }
         const cameraStatus = document.querySelector('input[name="camera_status"]:checked');
@@ -1315,8 +1392,9 @@
             camChecks.forEach(ch => {
                 let p = parseInt(ch.getAttribute('data-penalty')) || 0;
                 totalPenalty += p;
-                let camDefect = ch.nextElementSibling.innerText.toLowerCase();
-                details.push({ text: `Дефект работы камеры: ${camDefect}`, val: `-${p}%`, type: "penalty" });
+                let spanKey = ch.nextElementSibling.getAttribute('data-i18n');
+                let camDefect = t[spanKey] || ch.nextElementSibling.innerText;
+                details.push({ text: `${t.factCamDefect}: ${camDefect.toLowerCase()}`, val: `-${p}%`, type: "penalty" });
             });
         }
 
@@ -1327,8 +1405,9 @@
             micChecks.forEach(ch => {
                 let p = parseInt(ch.getAttribute('data-penalty')) || 0;
                 totalPenalty += p;
-                let micDefect = ch.nextElementSibling.innerText.toLowerCase();
-                details.push({ text: `Проблема со звуком/микрофоном: ${micDefect}`, val: `-${p}%`, type: "penalty" });
+                let spanKey = ch.nextElementSibling.getAttribute('data-i18n');
+                let micDefect = t[spanKey] || ch.nextElementSibling.innerText;
+                details.push({ text: `${t.factMicDefect}: ${micDefect.toLowerCase()}`, val: `-${p}%`, type: "penalty" });
             });
         }
 
@@ -1339,8 +1418,9 @@
             netChecks.forEach(ch => {
                 let p = parseInt(ch.getAttribute('data-penalty')) || 0;
                 totalPenalty += p;
-                let netDefect = ch.nextElementSibling.innerText.toLowerCase();
-                details.push({ text: `Связь и датчики: ${netDefect}`, val: `-${p}%`, type: "penalty" });
+                let spanKey = ch.nextElementSibling.getAttribute('data-i18n');
+                let netDefect = t[spanKey] || ch.nextElementSibling.innerText;
+                details.push({ text: `${t.factNetDefect}: ${netDefect.toLowerCase()}`, val: `-${p}%`, type: "penalty" });
             });
         }
 
@@ -1357,13 +1437,9 @@
         scoreValText.innerText = finalScore + "%";
 
         let colorVal = "";
-        if (finalScore >= 80) {
-            colorVal = "var(--green)";
-        } else if (finalScore >= 60) {
-            colorVal = "var(--yellow)";
-        } else {
-            colorVal = "var(--red)";
-        }
+        if (finalScore >= 80) colorVal = "var(--green)";
+        else if (finalScore >= 60) colorVal = "var(--yellow)";
+        else colorVal = "var(--red)";
 
         let deg = Math.round((finalScore / 100) * 360);
         circle.style.background = `conic-gradient(${colorVal} ${deg}deg, var(--gray) ${deg}deg)`;
@@ -1395,7 +1471,7 @@
                 <div class="price-row">
                     <span class="price-badge badge-green">${t.modeSellBadge}</span>
                     <div class="price-explanation">${t.recPriceLabel}</div>
-                    <div class="price-val" onclick="cycleCurrency()" title="Нажмите, чтобы сменить валюту">${formattedPrice}</div>
+                    <div class="price-val" onclick="cycleCurrency()">${formattedPrice}</div>
                     <div class="currency-hint">💡 Нажмите на стоимость, чтобы переключить валюту (₽ / $ / €)</div>
                 </div>
                 <div class="price-row">
@@ -1412,7 +1488,7 @@
                 <div class="price-row">
                     <span class="price-badge badge-blue">${t.modeBuyBadge}</span>
                     <div class="price-explanation">${t.buyPriceLabel}</div>
-                    <div class="price-val" onclick="cycleCurrency()" title="Нажмите, чтобы сменить валюту">${formattedPrice}</div>
+                    <div class="price-val" onclick="cycleCurrency()">${formattedPrice}</div>
                     <div class="currency-hint">💡 Нажмите на стоимость, чтобы переключить валюту (₽ / $ / €)</div>
                     <div style="font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.3;">${adviceText}</div>
                 </div>
